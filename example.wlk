@@ -4,6 +4,8 @@ object pacman {
 	var property position = game.origin()
 	var vidas = 3
 
+	method text() = ""
+
 	method perderVida() {
 		vidas = vidas - 1
 		position = game.origin()	

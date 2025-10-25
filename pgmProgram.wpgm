@@ -18,15 +18,25 @@ program pacmanGame {
 
 	// rivales
 	const rivales = [new Rival(numero = 1), new Rival(numero = 2)]
+	const listaImagenes= ["pacman.png","pacmanMayor.png"]
 	
 	rivales.forEach { rival => 
 		game.addVisual(rival)
 		game.whenCollideDo(rival, { personaje =>
 			personaje.perderVida()
 			game.say(pacman, "Ups! Perdí una vida")
+			
 			if (personaje.juegoTerminado()) {
 				game.say(pacman, "Se me terminaron las vidas!!!")
-				game.onTick(5000, "gameEnd", { game.stop() })
+				
+				//   para con el onTic detener el juego despues de unos segundos 5000 ms o mejor decir 5 segundos
+				//game.onTick(5000, "gameEnd", { game.stop() })
+				game.onTick(5000, "gameEnd", { pacman.image(listaImagenes.anyOne()) })
+				
+				// despues de tanto tiempo remuieve un ontic
+				game.schedule(5000, {game.removeTickEvent("gameEnd")
+				pacman.text()
+				game.stop()})
 			}
 		})
 	}
